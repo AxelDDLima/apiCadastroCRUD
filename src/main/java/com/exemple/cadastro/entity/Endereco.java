@@ -7,18 +7,21 @@ import jakarta.persistence.Id;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
-import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-@EqualsAndHashCode(callSuper = false)
 @Entity
-public class Cliente extends Pessoa{
+public class Endereco {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	private int desconto;
+	private Long cep;
+	private String estado;
+	private String cidade;
+	private String bairro;
+	private String logadouro;
+	private Integer numero;
 }
