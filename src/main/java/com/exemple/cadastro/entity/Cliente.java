@@ -3,8 +3,10 @@ package com.exemple.cadastro.entity;
 import java.util.HashSet;
 import java.util.Set;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
+
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
@@ -32,7 +34,9 @@ public class Cliente extends Pessoa{
 	private Integer desconto;
 	
 	//One = cliente e many = endereco
-	@OneToMany(mappedBy = "cliente", cascade = CascadeType.ALL, orphanRemoval = true)
+	@OneToMany(mappedBy = "cliente", cascade = CascadeType.REFRESH, orphanRemoval = true)
 	@Builder.Default
+	@JsonManagedReference
+	@Fetch(FetchMode.JOIN)
 	private Set<Endereco> enderecos = new HashSet<>();
 }

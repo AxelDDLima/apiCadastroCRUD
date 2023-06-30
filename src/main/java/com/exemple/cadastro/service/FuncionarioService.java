@@ -17,9 +17,6 @@ public class FuncionarioService {
 	
 	private FuncionarioRepository funcionarioRepository;
 	
-	//Essa é uma maneira de colocar em uma varial statica assim implementando um fake bd
-	//private static Map<Long, Cliente> listaPessoa = new HashMap<>();
-	
 	public Page<Funcionario> buscarTodosRegistros(PageRequest page){
 		return funcionarioRepository.findAll(page);
 	}

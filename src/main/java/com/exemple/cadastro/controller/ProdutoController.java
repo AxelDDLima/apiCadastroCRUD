@@ -18,15 +18,20 @@ import com.exemple.cadastro.entity.Produto;
 import com.exemple.cadastro.service.ProdutoService;
 
 @RestController
-@RequestMapping("registroFuncionario")
+@RequestMapping("produto")
 public class ProdutoController {
 	
 	@Autowired
 	ProdutoService service;
 	
 	@GetMapping
-	public Page<Produto> buscarTodosRegistros(@RequestParam(defaultValue = "0") Integer pagina, @RequestParam(defaultValue = "2") Integer itensPorPagina){		
+	public Page<Produto> buscarTodosRegistros(@RequestParam(defaultValue = "0") Integer pagina, @RequestParam(defaultValue = "10") Integer itensPorPagina){		
 		return service.buscarTodosRegistros(PageRequest.of(pagina, itensPorPagina));
+	}
+	
+	@GetMapping("buscarPorNome")
+	public Page<Produto> buscarPorNome(@RequestParam String nomeProduto , @RequestParam(defaultValue = "0") Integer pagina, @RequestParam(defaultValue = "10") Integer itensPorPagina){		
+		return service.buscarPorNome(nomeProduto.trim().toUpperCase(), PageRequest.of(pagina, itensPorPagina));
 	}
 	
 	@GetMapping("/{id}")

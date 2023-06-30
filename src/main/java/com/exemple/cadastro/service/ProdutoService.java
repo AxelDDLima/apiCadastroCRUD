@@ -2,6 +2,7 @@ package com.exemple.cadastro.service;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -20,8 +21,12 @@ public class ProdutoService {
 	//Essa é uma maneira de colocar em uma varial statica assim implementando um fake bd
 	//private static Map<Long, Cliente> listaPessoa = new HashMap<>();
 	
-	public Page<Produto> buscarTodosRegistros(PageRequest page){
+	public Page<Produto> buscarTodosRegistros(PageRequest page){		
 		return produtoRepository.findAll(page);
+	}
+
+	public Page<Produto> buscarPorNome(String nomeProduto, Pageable page){		
+		return produtoRepository.findByNome(nomeProduto, page);  
 	}
 	
 	public ResponseEntity<Produto> buscarRegistroId(Long id){

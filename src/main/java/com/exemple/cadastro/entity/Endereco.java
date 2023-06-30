@@ -1,7 +1,6 @@
 package com.exemple.cadastro.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -33,6 +32,6 @@ public class Endereco {
 	
 	@ManyToOne
 	@JoinColumn(name = "cliente_id", nullable = false)
-	@JsonIgnore
+	@JsonBackReference
 	private Cliente cliente;
 }

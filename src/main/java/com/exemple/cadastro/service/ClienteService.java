@@ -52,7 +52,15 @@ public class ClienteService {
 	
 	public ResponseEntity<Cliente> editarRegistroId(Long id, Cliente cliente){
 		if(clienteRepository.existsById(id)) {
+			Set<Endereco> enderecos = cliente.getEnderecos();
+			cliente.setEnderecos(new HashSet<>());
+			
 			Cliente editarCliente = clienteRepository.save(cliente);
+			
+			for(Endereco endereco : enderecos) {		
+				endereco.setCliente(Cliente.builder().id(cliente.getId()).build());
+				cliente.getEnderecos().add(enderecoRepository.save(endereco));
+			}
 			return ResponseEntity.status(HttpStatus.OK).body(editarCliente);
 		}
 		return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
