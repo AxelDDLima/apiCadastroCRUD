@@ -6,6 +6,7 @@ import java.util.Set;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import jakarta.persistence.CascadeType;
@@ -39,4 +40,11 @@ public class Cliente extends Pessoa{
 	@JsonManagedReference
 	@Fetch(FetchMode.JOIN)
 	private Set<Endereco> enderecos = new HashSet<>();
+	/*
+	@OneToMany(mappedBy = "cliente", orphanRemoval = true)
+	@Builder.Default
+	@JsonManagedReference
+	@JsonBackReference
+	private Set<Pedido> pedidos = new HashSet<>();
+	*/
 }

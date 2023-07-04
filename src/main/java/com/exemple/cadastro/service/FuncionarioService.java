@@ -1,7 +1,5 @@
 package com.exemple.cadastro.service;
 
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -16,17 +14,6 @@ import lombok.AllArgsConstructor;
 public class FuncionarioService {
 	
 	private FuncionarioRepository funcionarioRepository;
-	
-	public Page<Funcionario> buscarTodosRegistros(PageRequest page){
-		return funcionarioRepository.findAll(page);
-	}
-	
-	public ResponseEntity<Funcionario> buscarRegistroId(Long id){
-		if(funcionarioRepository.existsById(id)) {
-			return ResponseEntity.status(HttpStatus.OK).body(funcionarioRepository.findById(id).get());
-		}
-		return ResponseEntity.status(HttpStatus.OK).body(null);
-	}
 	
 	public ResponseEntity<Funcionario> registrarFuncionario(Funcionario funcionario){
 		Funcionario registrarFuncionario = funcionarioRepository.save(funcionario);
